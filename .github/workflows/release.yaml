@@ -1,4 +1,3 @@
-
 name: release
 
 on:
@@ -17,12 +16,13 @@ jobs:
       - name: Unshallow
         run: git fetch --prune --unshallow
 
-      - name: Read go version
+      - name: Read Go version
         id: go-version
         run: |
           content=`cat ./.go-version`
           echo "::set-output name=content::$content"
-      - name: Set up go
+
+      - name: Setup Go
         uses: actions/setup-go@v2
         with:
           # TODO: Replace with go-version-from-file when it is supported
