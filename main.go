@@ -28,6 +28,14 @@ func getOpenIssues(owner, repo string) []byte {
 		log.Fatal(err)
 	}
 
+	// throw error on 403 or 404
+	switch resp.StatusCode {
+	case 403:
+		log.Fatal("Permission denied!")
+	case 404:
+		log.Fatal("Repository not found!")
+	}
+
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
